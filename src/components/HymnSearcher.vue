@@ -5,6 +5,7 @@ import sHymn from '../services/HymnService'
 import BasicDialog from './BasicDialog.vue'
 import ListIcon from './icons/ListIcon.vue'
 import PlayIcon from './icons/PlayIcon.vue'
+import { debounce } from '../utils/debounce'
 
 const emit = defineEmits(['onPlayHymn'])
 
@@ -26,6 +27,8 @@ function searchHymn(hymnNumber: number) {
   emit('onPlayHymn', hymnNumber)
   dialog.value?.close()
 }
+
+const debouncedFilterHymns = debounce(filterHymns, 300)
 
 function filterHymns() {
   if (search.value.length > 0) {
@@ -57,7 +60,7 @@ function normalizeWord(word: string) {
   </button>
   <BasicDialog ref="dialog" title="" class="h-full">
     <template v-slot:header>
-      <input v-model="search" @input="filterHymns" type="search" class="input__text" id="search" placeholder="Buscar himno" data-test="search-hymn" />
+      <input v-model="search" @input="debouncedFilterHymns" type="search" class="input__text" id="search" placeholder="Buscar himno" data-test="search-hymn" />
     </template>
     <div class="space-y-1">
       <button @click="searchHymn(hymn.number)" v-for="hymn in filteredHymns" :key="hymn.id" type="button" class="bg-light-button-bg dark:bg-dark-button-bg hover:bg-light-button-hover dark:hover:bg-dark-button-hover w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background" data-test="hymn-item">
