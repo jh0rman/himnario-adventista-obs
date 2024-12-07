@@ -4,6 +4,7 @@ export function debounce (fn: Function, wait: number) {
     if (timer) {
       clearTimeout(timer)
     }
+    // @ts-ignore
     const context = this
     timer = setTimeout(() => {
       fn.apply(context, args)
