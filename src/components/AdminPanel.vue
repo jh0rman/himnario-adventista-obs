@@ -133,7 +133,7 @@ async function showVerse(index: number) {
 <template>
   <main class="flex flex-col gap-4 px-3 py-2 text-xs">
     <div class="flex gap-2">
-      <button @click="connected? disconnect() : connect()" :title="connected? 'Desconectar' : 'Conectar'" type="button" class="flex items-center gap-3 px-2 py-1 rounded w-28 h-7 btn">
+      <button @click="connected? disconnect() : connect()" :title="connected? 'Desconectar' : 'Conectar'" type="button" class="flex items-center gap-3 px-2 py-1 rounded w-32 h-7 btn">
         <div class="rounded-full w-2 h-2" :class="connected? 'bg-green' : 'bg-red'"></div>
         {{ connected? 'Conectado' : 'Desconectado' }}
       </button>
