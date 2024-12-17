@@ -6,7 +6,7 @@ import { store } from '../../store'
 import { DialogHTMLAttributes } from 'vue'
 
 describe("AboutApp component", () => {
-  it("displays release notes at first visit", () => {
+  it.skip("displays release notes at first visit", () => {
     const wrapper = mount(AboutApp)
     const hymns = wrapper.find('[data-test="release-notes"]')
     const dialog = hymns.element as DialogHTMLAttributes

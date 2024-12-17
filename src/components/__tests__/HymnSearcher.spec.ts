@@ -54,6 +54,7 @@ describe("HymnSearcher component", () => {
     it("shows only the hymns that match the search", async () => {
       const search = wrapper.get('[data-test="search-hymn"]')
       await search.setValue("Cantad Alegres")
+      await Bun.sleep(300)
 
       const hymns = wrapper.findAll('[data-test="hymn-item"]')
 
@@ -64,6 +65,7 @@ describe("HymnSearcher component", () => {
     it("is diacritics insensitive", async () => {
       const search = wrapper.get('[data-test="search-hymn"]')
       await search.setValue("da gloria al senor")
+      await Bun.sleep(300)
 
       const hymns = wrapper.findAll('[data-test="hymn-item"]')
 
