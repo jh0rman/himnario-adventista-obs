@@ -11,6 +11,7 @@
     "lint:fix": "biome check --fix"
   },
   "dependencies": {
+    "@types/bun": "latest",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
     "bun-plugin-vue3": "^1.0.0-alpha.4",
@@ -24,7 +25,6 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@happy-dom/global-registrator": "^16.0.1",
-    "@types/bun": "latest",
     "@vue/test-utils": "^2.4.6"
   }
 }
