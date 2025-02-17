@@ -1,6 +1,24 @@
 import { write } from 'bun'
 
 await write(
+  'himnario-adventista/src/index.ts',
+  `import { Cromo } from 'cromo'
+import { cors } from './middleware/cors'
+import { log } from './middleware/log'
+import { $ } from 'bun'
+
+$\`cd \${__dirname}\`
+
+const cromo = new Cromo()
+
+cromo.setMiddleware([cors, log])
+
+cromo.start((server) => {
+  console.info(\`➜  Local:   \${server.url}\`)
+})`,
+)
+
+await write(
   'himnario-adventista/api/index.ts',
   `import { file } from 'bun'
 import type { CromoHandler } from 'cromo'
