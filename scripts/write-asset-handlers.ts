@@ -5,10 +5,10 @@ await write(
   `import { Cromo } from 'cromo'
 import { cors } from './middleware/cors'
 import { log } from './middleware/log'
-import path from 'path'
+// import path from 'path'
 
-const dir = path.resolve(__dirname, '../')
-process.chdir(dir)
+// const dir = path.resolve(__dirname, '../')
+// process.chdir(dir)
 
 const cromo = new Cromo()
 
