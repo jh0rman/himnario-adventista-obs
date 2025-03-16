@@ -4,6 +4,7 @@ import packageJson from '../../package.json'
 import { store } from '../store.ts'
 import BasicDialog from './BasicDialog.vue'
 import AboutIcon from './icons/AboutIcon.vue'
+import BaseButton from './commons/BaseButton.vue'
 
 const dialog = ref<InstanceType<typeof BasicDialog> | null>(null)
 
@@ -17,9 +18,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <button @click="dialog!.open" title="Acerca de" type="button" class="btn w-7 h-7">
+  <BaseButton
+    class="w-7 h-7"
+    title="Acerca de"
+    @click="dialog?.open"
+  >
     <AboutIcon />
-  </button>
+  </BaseButton>
   <BasicDialog ref="dialog" title="Himnario Adventista Broadcast" data-test="release-notes">
     <div class="flex flex-col gap-1">
       <div>
@@ -62,6 +67,9 @@ onMounted(() => {
 
 <style scoped>
 .link {
-  @apply text-blue hover:underline;
+  color: var(--color-sky-500);
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>

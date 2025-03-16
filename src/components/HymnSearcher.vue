@@ -6,6 +6,8 @@ import BasicDialog from './BasicDialog.vue'
 import ListIcon from './icons/ListIcon.vue'
 import PlayIcon from './icons/PlayIcon.vue'
 import { debounce } from '../utils/debounce'
+import InputText from './commons/InputText.vue'
+import BaseButton from './commons/BaseButton.vue'
 
 const emit = defineEmits(['onPlayHymn'])
 
@@ -55,15 +57,33 @@ function normalizeWord(word: string) {
 </script>
 
 <template>
-  <button @click="dialog!.open" title="Lista de himnos" type="button" class="btn w-8 h-8">
+  <BaseButton
+    class="w-8 h-8"
+    title="Lista de himnos"
+    @click="dialog?.open"
+  >
     <ListIcon />
-  </button>
+  </BaseButton>
   <BasicDialog ref="dialog" title="" class="h-full">
     <template v-slot:header>
-      <input v-model="search" @input="debouncedFilterHymns" type="search" class="input__text" id="search" placeholder="Buscar himno" data-test="search-hymn" />
+      <InputText
+        v-model="search"
+        id="search"
+        type="search"
+        placeholder="Buscar himno"
+        data-test="search-hymn"
+        @input="debouncedFilterHymns"
+      />
     </template>
     <div class="space-y-1">
-      <button @click="searchHymn(hymn.number)" v-for="hymn in filteredHymns" :key="hymn.id" type="button" class="bg-light-button-bg dark:bg-dark-button-bg hover:bg-light-button-hover dark:hover:bg-dark-button-hover w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background" data-test="hymn-item">
+      <button
+        v-for="hymn in filteredHymns"
+        :key="hymn.id"
+        class="bg-[#F3F3F3] dark:bg-[#3C404B] hover:bg-[#FEFEFF] dark:hover:bg-[#4F535E] w-full flex items-stretch rounded-sm divide-x divide-[#E5E5E5] dark:divide-[#2B2E38]"
+        type="button"
+        data-test="hymn-item"
+        @click="searchHymn(hymn.number)"
+      >
         <div class="px-2 py-1">
           {{ String(hymn.number).padStart(3, '0') }}
         </div>
@@ -71,7 +91,7 @@ function normalizeWord(word: string) {
           {{ hymn.title }}
         </div>
         <div class="px-2 w-7 self-stretch flex-shrink-0 flex items-center">
-          <PlayIcon />
+          <PlayIcon class="w-6 h-6" />
         </div>
       </button>
     </div>

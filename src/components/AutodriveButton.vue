@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { store } from '../store'
+import BaseButton from './commons/BaseButton.vue';
 
 function setAutodriveVerses(on: boolean) {
   store.autodriveVerses = on
@@ -8,8 +9,12 @@ function setAutodriveVerses(on: boolean) {
 </script>
 
 <template>
-  <button @click="setAutodriveVerses(!store.autodriveVerses)" :title="store.autodriveVerses? 'Desactivar' : 'Activar'" type="button" class="flex items-center gap-3 px-2 py-1 rounded btn">
-    <div class="rounded-full w-2 h-2" :class="store.autodriveVerses? 'bg-green' : 'bg-red'"></div>
+  <BaseButton
+    class="flex items-center gap-3"
+    :title="store.autodriveVerses ? 'Desactivar' : 'Activar'"
+    @click="setAutodriveVerses(!store.autodriveVerses)"
+  >
+    <div class="rounded-full w-2 h-2" :class="store.autodriveVerses? 'bg-green-600' : 'bg-red-600'"></div>
     Autoconducir
-  </button>
+  </BaseButton>
 </template>

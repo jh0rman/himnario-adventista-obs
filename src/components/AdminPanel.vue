@@ -14,6 +14,8 @@ import NextIcon from './icons/NextIcon.vue'
 import PreviousIcon from './icons/PreviousIcon.vue'
 import SearchIcon from './icons/SearchIcon.vue'
 import StopIcon from './icons/StopIcon.vue'
+import InputText from './commons/InputText.vue'
+import BaseButton from './commons/BaseButton.vue'
 
 const {
   connect,
@@ -133,10 +135,14 @@ async function showVerse(index: number) {
 <template>
   <main class="flex flex-col gap-4 px-3 py-2 text-xs">
     <div class="flex gap-2">
-      <button @click="connected? disconnect() : connect()" :title="connected? 'Desconectar' : 'Conectar'" type="button" class="flex items-center gap-3 px-2 py-1 rounded w-32 h-7 btn">
-        <div class="rounded-full w-2 h-2" :class="connected? 'bg-green' : 'bg-red'"></div>
+      <BaseButton
+        :title="connected? 'Desconectar' : 'Conectar'"
+        class="flex items-center gap-3 w-32 h-7"
+        @click="connected? disconnect() : connect()"
+      >
+        <div class="rounded-full w-2 h-2" :class="connected? 'bg-green-600' : 'bg-red-600'"></div>
         {{ connected? 'Conectado' : 'Desconectado' }}
-      </button>
+      </BaseButton>
       <div class="ml-auto flex gap-2">
         <SetupScene />
         <AutodriveButton />
@@ -145,29 +151,63 @@ async function showVerse(index: number) {
       </div>
     </div>
     <form class="flex gap-2" onsubmit="return false">
-      <input v-model="hymnNumber" type="number" min="1" max="613" class="input__text w-16" name="number" id="number" title="Número del himno">
-      <button @click="search(hymnNumber)" title="Buscar" type="submit" class="btn w-8 h-8">
+      <InputText
+        v-model="hymnNumber"
+        id="number"
+        name="number"
+        type="number"
+        min="1"
+        max="613"
+        class="w-16"
+        title="Número del himno"
+      />
+      <BaseButton
+        class="w-8 h-8"
+        title="Buscar"
+        type="submit"
+        @click="search(hymnNumber)"
+      >
         <SearchIcon />
-      </button>
+      </BaseButton>
       <HymnSearcher @on-play-hymn="search($event)" />
-      <button @click="goTitle()" title="Principio" :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || hymnIndex < 1" type="button" class="btn w-8 h-8 ms-auto">
+      <BaseButton
+        :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || hymnIndex < 1"
+        class="w-8 h-8 ms-auto"
+        title="Principio"
+        @click="goTitle()"
+      >
         <HomeIcon />
-      </button>
-      <button @click="hymnIndex--" title="Verso anterior" :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || hymnIndex < 2" type="button" class="btn w-8 h-8">
+      </BaseButton>
+      <BaseButton
+        :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || hymnIndex < 2"
+        class="w-8 h-8"
+        title="Verso anterior"
+        @click="hymnIndex--"
+      >
         <PreviousIcon />
-      </button>
-      <button @click="hymnIndex++" title="Verso siguiente" :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || (hymnData? hymnIndex >= hymnData.sequence.length : true)" type="button" class="btn w-8 h-8">
+      </BaseButton>
+      <BaseButton
+        :disabled="!connected || !store.onSearchHymnScene || store.autodriveVerses || (hymnData? hymnIndex >= hymnData.sequence.length : true)"
+        class="w-8 h-8"
+        title="Verso siguiente"
+        @click="hymnIndex++"
+      >
         <NextIcon />
-      </button>
-      <button @click="toHomeScene(true)" title="Detener" :disabled="!connected" type="button" class="btn w-8 h-8">
+      </BaseButton>
+      <BaseButton
+        :disabled="!connected"
+        class="w-8 h-8"
+        title="Detener"
+        @click="toHomeScene(true)"
+      >
         <StopIcon />
-      </button>
+      </BaseButton>
     </form>
     <div class="space-y-2">
       <p data-test="hymn-title">
-        Reproduciendo: <span class="text-muted">{{ hymnData?.title }}</span>
+        Reproduciendo: <span class="text-[#9E9E9E]">{{ hymnData?.title }}</span>
       </p>
-      <audio ref="playerElement" controls>
+      <audio ref="playerElement" controls class="dark:audio-dark">
         <source :src="hymnData && fileUrl()" type="audio/mpeg">
         Tu navegador no soporta el elemento <code>audio</code>.
       </audio>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import CloseIcon from './icons/CloseIcon.vue'
+import BaseButton from './commons/BaseButton.vue';
 
 defineProps({
   title: {
@@ -26,15 +27,19 @@ function close() {
 </script>
 
 <template>
-  <dialog ref="dialog" class="backdrop:bg-black backdrop:bg-opacity-50 w-full max-w-[280px] rounded-lg bg-light-background dark:bg-dark-background text-black dark:text-white p-0">
-    <div class="sticky top-0 inline-flex items-center bg-light-background dark:bg-dark-background border-b border-light-button-active dark:border-dark-button-hover p-4 py-3 w-full text-base z-10">
+  <dialog ref="dialog" class="backdrop:bg-black/50 w-full max-w-[280px] rounded-lg bg-[#E5E5E5] dark:bg-[#2B2E38] text-black dark:text-white m-auto">
+    <div class="sticky top-0 inline-flex items-center bg-[#E5E5E5] dark:bg-[#2B2E38] border-b border-[#C1C1C1] dark:border-[#4F535E] p-4 py-3 w-full text-base z-10">
       <h1 class="font-bold leading-none">
         {{ title }}
       </h1>
       <slot name="header"></slot>
-      <button @click="close" title="Cerrar" type="button" class="btn w-7 h-7 flex-shrink-0 ms-auto">
+      <BaseButton
+        class="w-7 h-7 flex-shrink-0 ms-auto"
+        title="Cerrar"
+        @click="close"
+      >
         <CloseIcon />
-      </button>
+      </BaseButton>
     </div>
     <div class="p-4 py-3 text-sm">
       <slot></slot>

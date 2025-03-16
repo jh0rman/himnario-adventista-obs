@@ -4,6 +4,9 @@ import { useObs } from '../composables/obs'
 import { defaultValues, store } from '../store'
 import BasicDialog from './BasicDialog.vue'
 import GearIcon from './icons/GearIcon.vue'
+import InputSelect from './commons/InputSelect.vue'
+import InputText from './commons/InputText.vue'
+import BaseButton from './commons/BaseButton.vue'
 
 const { reconnect } = useObs()
 
@@ -52,9 +55,13 @@ async function closeDialog() {
 </script>
 
 <template>
-  <button @click="dialog!.open" title="Configuración" type="button" class="btn w-7 h-7 ml-auto">
+  <BaseButton
+    class="w-7 h-7 ml-auto"
+    title="Configuración"
+    @click="dialog?.open"
+  >
     <GearIcon />
-  </button>
+  </BaseButton>
   <BasicDialog ref="dialog" title="Configuración" data-test="settings">
     <div class="text-sm">
       <div class="mb-2">
@@ -77,54 +84,58 @@ async function closeDialog() {
         </div>
         <div class="flex flex-col">
           <label for="hs">Escena de himno</label>
-          <select v-model="store.onSearchHymnScene" class="input__text" id="hs">
+          <InputSelect v-model="store.onSearchHymnScene" id="hs">
             <option value="">ninguno</option>
             <option class="hidden" :value="store.onSearchHymnScene">{{ store.onSearchHymnScene }}</option>
             <option v-for="(scene, index) in store.sceneList" :key="index" :value="scene.sceneName">{{ scene.sceneName }}</option>
-          </select>
+          </InputSelect>
         </div>
       </div>
       <div class="mb-2">
         <h3 class="font-bold">Al terminar la música:</h3>
         <div class="flex flex-col">
           <label for="sc">Cambiar a escena</label>
-          <select v-model="store.onMusicEndSwitchToScene" class="input__text" id="sc">
+          <InputSelect v-model="store.onMusicEndSwitchToScene" id="sc">
             <option value="">ninguno</option>
             <option class="hidden" :value="store.onMusicEndSwitchToScene">{{ store.onMusicEndSwitchToScene }}</option>
             <option v-for="(scene, index) in store.sceneList" :key="index" :value="scene.sceneName">{{ scene.sceneName }}</option>
-          </select>
+          </InputSelect>
         </div>  
       </div>
       <div class="mb-2">
         <h3 class="font-bold">Red:</h3>
         <div class="flex flex-col">
           <label for="ow">URL de OBS Websocket</label>
-          <input v-model="store.obsWebsocketUrl" type="text" class="input__text" id="ow" :placeholder="defaultValues.obsWebsocketUrl">
+          <InputText v-model="store.obsWebsocketUrl" id="ow" :placeholder="defaultValues.obsWebsocketUrl" />
         </div>
         <div class="flex flex-col">
           <label for="mh">URL de host de música</label>
-          <input v-model="store.musicHostUrl" type="text" class="input__text" id="mh" :placeholder="defaultValues.musicHostUrl ?? 'default'">
+          <InputText v-model="store.musicHostUrl" id="mh" :placeholder="defaultValues.musicHostUrl ?? 'default'" />
         </div>
         <div class="flex flex-col">
           <label for="ha">URL de API de himnario</label>
-          <input v-model="store.hymnalApiUrl" type="text" class="input__text" id="ha" :placeholder="defaultValues.hymnalApiUrl">
+          <InputText v-model="store.hymnalApiUrl" id="ha" :placeholder="defaultValues.hymnalApiUrl" />
         </div>
       </div>
       <div class="mb-3">
         <h3 class="font-bold">Personalización:</h3>
         <div class="flex flex-col">
           <label for="tm">Tema</label>
-          <select v-model="darkMode" class="input__text" id="tm">
+          <InputSelect v-model="darkMode" id="tm">
             <option value="light">claro</option>
             <option value="dark">oscuro</option>
-          </select>
+          </InputSelect>
         </div>
       </div>
     </div>
     <template v-slot:footer>
-      <button title="Guardar y cerrar" type="button" class="btn ml-auto" @click="closeDialog">
+      <BaseButton
+        class="ml-auto"
+        title="Guardar y cerrar"
+        @click="closeDialog"
+      >
         Guardar y cerrar
-      </button>
+      </BaseButton>
     </template>
   </BasicDialog>
 </template>

@@ -7,35 +7,23 @@ import AdminPanel from './components/AdminPanel.vue'
 </template>
 
 <style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  select {
-    @apply border-white dark:border-dark-input-bg border-r-8;
-  }
-  input[type="checkbox"] {
-    @apply dark:accent-dark-input-bg;
-  }
-  audio::-webkit-media-controls-panel {
-    @apply dark:bg-dark-button-bg;
-  }
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@layer components {
-  .btn {
-    @apply rounded px-2 py-1;
-    @apply bg-light-button-bg hover:bg-light-button-hover active:bg-light-button-active;
-    @apply dark:bg-dark-button-bg dark:hover:bg-dark-button-hover dark:active:bg-dark-button-active;
-    @apply disabled:opacity-50 disabled:pointer-events-none;
-  }
-  .input__text {
-    @apply text-sm rounded px-2 py-1 outline-none dark:bg-dark-input-bg;
-  }
-}
-
-:root {
+:root:where(.dark, .dark *) {
   color-scheme: light dark;
+}
+
+@utility audio-light {
+  &::-webkit-media-controls-panel {
+    background: #F5F5F5;
+  }
+}
+
+@utility audio-dark {
+  &::-webkit-media-controls-panel {
+    background: #3C404B;
+  }
 }
 </style>

@@ -4,6 +4,7 @@ import { ref, watch } from 'vue'
 import { useObs } from '../composables/obs'
 import { sceneStatus, store } from '../store'
 import BasicDialog from './BasicDialog.vue'
+import BaseButton from './commons/BaseButton.vue'
 
 const { on, connected, getSceneItems, createScene, createSource } = useObs()
 
@@ -70,41 +71,41 @@ async function createSceneAndSources() {
   <BasicDialog ref="dialog" title="" data-test="settings">
     <template v-slot:header>
       <div class="flex items-center gap-2">
-        <div class="rounded-full w-2 h-2" :class="sceneStatus.scene? 'bg-green' : 'bg-red'"></div>
+        <div class="rounded-full w-2 h-2" :class="sceneStatus.scene? 'bg-green-600' : 'bg-red-600'"></div>
         {{ store.onSearchHymnScene }}
       </div>
     </template>
     <div class="space-y-1">
-      <div class="bg-light-button-bg dark:bg-dark-button-bg w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background">
+      <div class="bg-[#F3F3F3] dark:bg-[#3C404B] w-full flex items-stretch rounded-sm divide-x divide-[#E5E5E5] dark:divide-[#2B2E38]">
         <div class="px-2 py-1 flex items-center">
-          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.himnoNumero? 'bg-green' : 'bg-red'"></div>
+          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.himnoNumero? 'bg-green-600' : 'bg-red-600'"></div>
         </div>
         <div class="px-2 py-1 grow flex">
           himno_numero
           <span class="ms-auto opacity-60">Texto (GDI+)</span>
         </div>
       </div>
-      <div class="bg-light-button-bg dark:bg-dark-button-bg w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background">
+      <div class="bg-[#F3F3F3] dark:bg-[#3C404B] w-full flex items-stretch rounded-sm divide-x divide-[#E5E5E5] dark:divide-[#2B2E38]">
         <div class="px-2 py-1 flex items-center">
-          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.himnoTitulo? 'bg-green' : 'bg-red'"></div>
+          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.himnoTitulo? 'bg-green-600' : 'bg-red-600'"></div>
         </div>
         <div class="px-2 py-1 grow flex">
           himno_titulo
           <span class="ms-auto opacity-60">Texto (GDI+)</span>
         </div>
       </div>
-      <div class="bg-light-button-bg dark:bg-dark-button-bg w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background">
+      <div class="bg-[#F3F3F3] dark:bg-[#3C404B] w-full flex items-stretch rounded-sm divide-x divide-[#E5E5E5] dark:divide-[#2B2E38]">
         <div class="px-2 py-1 flex items-center">
-          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.versoNumero? 'bg-green' : 'bg-red'"></div>
+          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.versoNumero? 'bg-green-600' : 'bg-red-600'"></div>
         </div>
         <div class="px-2 py-1 grow flex">
           verso_numero
           <span class="ms-auto opacity-60">Texto (GDI+)</span>
         </div>
       </div>
-      <div class="bg-light-button-bg dark:bg-dark-button-bg w-full flex items-stretch rounded divide-x divide-light-background dark:divide-dark-background">
+      <div class="bg-[#F3F3F3] dark:bg-[#3C404B] w-full flex items-stretch rounded-sm divide-x divide-[#E5E5E5] dark:divide-[#2B2E38]">
         <div class="px-2 py-1 flex items-center">
-          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.versoContenido? 'bg-green' : 'bg-red'"></div>
+          <div class="rounded-full w-2 h-2" :class="sceneStatus.source.versoContenido? 'bg-green-600' : 'bg-red-600'"></div>
         </div>
         <div class="px-2 py-1 grow flex">
           verso_contenido
@@ -115,9 +116,13 @@ async function createSceneAndSources() {
       <p v-else class="pt-1">✅ Todos los recursos están listos</p>
     </div>
     <template v-slot:footer>
-      <button v-if="!sceneStatus.scene || Object.values(sceneStatus.source).some(v => !v)" type="button" class="btn ml-auto" @click="createSceneAndSources()">
+      <BaseButton
+        v-if="!sceneStatus.scene || Object.values(sceneStatus.source).some(v => !v)"
+        class="ml-auto"
+        @click="createSceneAndSources()"
+      >
         Crear recursos
-      </button>
+      </BaseButton>
     </template>
   </BasicDialog>
 </template>
