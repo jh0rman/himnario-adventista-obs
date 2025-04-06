@@ -23,7 +23,7 @@ export function useHymn() {
       return ''
     }
     const fileName = SAME_HOST
-      ? hymnData.value.mp3Filename.replace(/ /g, '_')
+      ? hymnData.value.mp3Filename.split(' ')[0]
       :  hymnData.value.mp3Filename
     const hostUrl = `${store.musicHostUrl ? store.musicHostUrl : defaultValues.musicHostUrl}/${
       store.onlyInstrumental ? 'instrumental' : 'vocal'

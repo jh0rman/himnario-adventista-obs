@@ -34,13 +34,16 @@ await write(
   'himnario-adventista/api/assets/[...slug].ts',
   `import { file } from 'bun'
 import type { CromoHandler } from 'cromo'
+import { readdir } from 'node:fs/promises'
 
-export const GET: CromoHandler = ({ url, responseInit }) => {
+export const GET: CromoHandler = async ({ url, responseInit }) => {
   let path = decodeURIComponent(url.pathname)
   const pathSegments = path.split('/').filter(Boolean)
 
   if (pathSegments.length > 2) {
-    path = path.replace(/_/g, ' ').replace('.mp3', '.ogg')
+    const files = await readdir(\`./assets/\${pathSegments[1]}\`)
+    const match = files.find((name) => name.startsWith(pathSegments[2]))
+    path = path.replace(pathSegments[2], match)
   }
 
   const asset = file(\`.\${path}\`)
