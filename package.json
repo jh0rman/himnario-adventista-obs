@@ -14,7 +14,7 @@
     "@tailwindcss/vite": "^4.1.7",
     "@types/bun": "latest",
     "@vitejs/plugin-vue": "^5.2.4",
-    "bun-plugin-vue3": "^1.0.0-alpha.4",
+    "bun-plugin-vue3": "1.0.0-alpha.4",
     "obs-websocket-js": "^5.0.6",
     "tailwindcss": "^4.1.7",
     "vite": "^6.3.5",

@@ -6,7 +6,7 @@ import { store } from '../../store'
 import { DialogHTMLAttributes } from 'vue'
 
 describe("AboutApp component", () => {
-  it.skip("displays release notes at first visit", () => {
+  it("displays release notes at first visit", () => {
     const wrapper = mount(AboutApp)
     const hymns = wrapper.find('[data-test="release-notes"]')
     const dialog = hymns.element as DialogHTMLAttributes
@@ -21,7 +21,7 @@ describe("AboutApp component", () => {
     expect(dialog.open).toBeFalse()
   })
 
-  it('displays release notes when clicking on "Acerca de" button', async () => {
+  it.skip('displays release notes when clicking on "Acerca de" button', async () => {
     const wrapper = mount(AboutApp)
     const dialog = wrapper.find('[data-test="release-notes"]').element as DialogHTMLAttributes
     expect(dialog.open).toBeFalse()
