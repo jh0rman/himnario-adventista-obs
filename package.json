@@ -4,26 +4,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
+    "dev": "bun ./index.html",
+    "build": "bun ./index.ts",
+    "preview": "serve ./dist",
     "lint": "biome check",
     "lint:fix": "biome check --fix"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.7",
     "@types/bun": "latest",
-    "@vitejs/plugin-vue": "^5.2.4",
-    "bun-plugin-vue3": "1.0.0-alpha.4",
     "obs-websocket-js": "^5.0.6",
-    "tailwindcss": "^4.1.7",
-    "vite": "^6.3.5",
-    "vue": "^3.5.14",
-    "vue-tsc": "^2.2.10"
+    "tailwindcss": "^4.1.14",
+    "vue": "^3.5.22",
+    "vue-tsc": "^3.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@happy-dom/global-registrator": "^17.4.7",
-    "@vue/test-utils": "^2.4.6"
+    "@happy-dom/global-registrator": "^20.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "bun-plugin-tailwind": "^0.1.2",
+    "bun-plugin-vue3": "^1.0.0-beta.2",
+    "serve": "^14.2.5"
   }
 }
