@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🧄 Use Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
@@ -36,8 +36,6 @@ jobs:
 
       - name: 🧄 Use Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.1.43
 
       - name: ⬇️ Clone Himnario API
         run: |
@@ -46,7 +44,7 @@ jobs:
 
       - name: 🔨 Build Himnario OBS
         run: |
-          bun i --production
+          bun i
           SAME_HOST=true bun run build
           cp -r dist/* himnario-adventista && rm -rf dist
 
@@ -54,7 +52,7 @@ jobs:
         run: bun scripts/write-asset-handlers.ts
 
       - name: 📥 Install dependencies
-        run: cd himnario-adventista && bun i --production
+        run: cd himnario-adventista && bun i
 
       - name: 🔨 Build executables
         run: |
